@@ -1,4 +1,4 @@
-import 'package:frontend_expenses_tracker/decorators/test_decorator.dart';
+import 'package:frontend_expenses_tracker/shared/decorators/test_decorator.dart';
 
 final class Login {
   @IsTest()
