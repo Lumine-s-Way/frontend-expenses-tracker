@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_expenses_tracker/layouts/responsive.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,11 +8,12 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  final String _title = 'Expenses tracker DEMO';
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: _title,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const Responsive(),
     );
   }
 }
