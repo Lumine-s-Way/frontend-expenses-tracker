@@ -1,6 +1,6 @@
 import 'package:frontend_expenses_tracker/shared/decorators/test_decorator.dart';
 
-class User {
+final class User {
   // @IsTest()
   final String id;
   final String username;
@@ -15,9 +15,18 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      id: json['data']['id'],
-      username: json['data']['username'],
-      password: json['data']['password'],
+      id: json['id'],
+      username: json['username'],
+      password: json['password'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      "id": id,
+      "username": username,
+      "password": password
+    };
+    ;
   }
 }

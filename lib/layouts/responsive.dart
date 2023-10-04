@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:frontend_expenses_tracker/features/auth/services/auth-http.service.dart';
 
-import 'package:http/http.dart' as http;
 
 import '../features/auth/models/user.model.dart';
 
@@ -17,14 +16,15 @@ class Responsive extends StatefulWidget {
 class _ResponsiveState extends State<Responsive> {
   final AuthHttpService authHttpService = AuthHttpService();
 
-  late Future<Album> futureAlbum;
-  late Future<User> user;
+  late Future<List<User>> user;
 
   @override
   void initState() {
     super.initState();
-    futureAlbum = fetchAlbum();
-    user = authHttpService.findOne("917a8f5a-7748-476a-b3c7-dee58a2d68eb");
+
+    // user = authHttpService.findOne("917a8f5a-7748-476a-b3c7-dee58a2d68eb");
+    user = authHttpService.findAll();
+
   }
 
   @override
@@ -49,11 +49,35 @@ class _ResponsiveState extends State<Responsive> {
     //     return const CircularProgressIndicator();
     //   },
     // );
-    return FutureBuilder<User>(
+    // return FutureBuilder<dynamic>(
+    //   future: user,
+    //   builder: (context, snapshot) {
+    //     if (snapshot.hasData) {
+    //       return Column( children: [
+    //           // Text(snapshot.data!.id),
+    //           // Text(snapshot.data!.username)
+    //         ],);
+    //     } else if (snapshot.hasError) {
+    //       return Text('${snapshot.error}');
+    //     }
+    //
+    //     // By default, show a loading spinner.
+    //     return const CircularProgressIndicator();
+    //   },
+    // );
+    return FutureBuilder<List<User>>(
       future: user,
       builder: (context, snapshot) {
+        // List<Widget> texts = [];
+        List<Text> texts = [];
+
         if (snapshot.hasData) {
-          return Text(snapshot.data!.id);
+          for(User user in snapshot.data!){
+            texts.add(Text(user.id));
+            texts.add(Text(user.username));
+          }
+
+          return Column( children: texts,);
         } else if (snapshot.hasError) {
           return Text('${snapshot.error}');
         }
@@ -64,38 +88,6 @@ class _ResponsiveState extends State<Responsive> {
     );
   }
 
-  Future<Album> fetchAlbum() async {
-    final response = await http
-        .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
 
-    if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      return Album.fromJson(jsonDecode(response.body));
-    } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      throw Exception('Failed to load album');
-    }
-  }
 }
 
-class Album {
-  final int userId;
-  final int id;
-  final String title;
-
-  const Album({
-    required this.userId,
-    required this.id,
-    required this.title,
-  });
-
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return Album(
-      userId: json['userId'],
-      id: json['id'],
-      title: json['title'],
-    );
-  }
-}
