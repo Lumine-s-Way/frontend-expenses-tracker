@@ -1,4 +1,5 @@
 import 'package:frontend_expenses_tracker/shared/decorators/test_decorator.dart';
+import 'package:frontend_expenses_tracker/shared/models/json.model.dart';
 
 class Login {
   // @IsTest()
@@ -18,6 +19,7 @@ class Login {
       password: json['password'],
     );
   }
+
 
 
 }

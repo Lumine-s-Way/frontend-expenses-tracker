@@ -1,11 +1,12 @@
 
 
+import 'package:frontend_expenses_tracker/shared/models/pagination.model.dart';
+
 class Response<T>{
-  // @IsTest()
   final T data;
   final String message;
   final String title;
-  final dynamic pagination;
+  final Pagination pagination;
 
   const Response(
       {required this.data, required this.message, required this.title, required this.pagination});
@@ -19,7 +20,7 @@ class Response<T>{
       data: json['data'],
       message: json['message'],
       title: json['title'],
-      pagination: json['pagination'],
+      pagination: Pagination.fromJson(json['pagination']),
     );
   }
 
