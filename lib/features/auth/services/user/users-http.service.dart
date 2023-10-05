@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:frontend_expenses_tracker/configs/consts/config.dart';
 import 'package:frontend_expenses_tracker/features/auth/models/user.model.dart';
 
-class AuthHttpService {
+class UserHttpService {
   final url = "$uri/users";
 
   Future<User> findOne(String id) async {
@@ -28,12 +28,7 @@ class AuthHttpService {
     Response<List<dynamic>> convertResponse =
         Response.fromJson(jsonDecode(response.body));
 
-    for (Map<String, dynamic> res in convertResponse.data) {
-      User convertUser = User.fromJson(res);
-      users.add(convertUser);
-    }
-
-    return users;
+    return User.toArray(convertResponse.data);
   }
 
   void create(User user) async {

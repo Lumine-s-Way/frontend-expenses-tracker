@@ -1,4 +1,4 @@
-class ExpenseService{
+class UserService{
 
   showInputError(){
     throw 'not implemented';

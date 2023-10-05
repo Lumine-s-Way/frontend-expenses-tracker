@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:frontend_expenses_tracker/features/auth/services/auth-http.service.dart';
+import 'package:frontend_expenses_tracker/features/auth/services/user/users-http.service.dart';
 
 
 import '../features/auth/models/user.model.dart';
@@ -14,7 +14,7 @@ class Responsive extends StatefulWidget {
 }
 
 class _ResponsiveState extends State<Responsive> {
-  final AuthHttpService authHttpService = AuthHttpService();
+  final UserHttpService authHttpService = UserHttpService();
 
   late Future<List<User>> user;
 
