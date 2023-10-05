@@ -73,7 +73,7 @@ class _ResponsiveState extends State<Responsive> {
 
         if (snapshot.hasData) {
           for(User user in snapshot.data!){
-            texts.add(Text(user.id));
+            texts.add(Text(user.id ?? ""));
             texts.add(Text(user.username));
           }
 
