@@ -5,13 +5,13 @@ import 'package:http/http.dart' as http;
 import 'package:frontend_expenses_tracker/configs/consts/config.dart';
 import 'package:frontend_expenses_tracker/features/auth/models/user.model.dart';
 
-class UserHttpService {
-  final url = "$uri/users";
+class AuthHttpService {
+  final url = "$uri/auth";
 
   Future<User> findOne(String id) async {
     final response = await http.get(Uri.parse("$url/$id"));
 
-    if (response.statusCode >= 400) throw Exception('Failed to load User');
+    if (response.statusCode >= 400) throw Exception('Failed to load Auth');
 
     Response convertResponse = Response.fromJson(jsonDecode(response.body));
     return User.fromJson(convertResponse.data);
